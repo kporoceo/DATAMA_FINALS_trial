@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="mystyle.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="logo-container">
             <img src="petkingdom logo.png" alt="Pet Kingdom Logo" class="logo">
@@ -18,13 +17,11 @@
         </div>
     </header>
 
-    <!-- Booking Form -->
     <div class="container">
         <h2>Book an Appointment</h2>
-        <form id="appointmentForm" autocomplete="off">
+        <form id="appointmentForm" autocomplete="off" action="process_appointment.php" method="POST">
             <input type="text" name="fakeField" style="display: none;">
 
-            <!-- Owner and Pet Information -->
             <fieldset>
                 <legend>Owner and Pet Information</legend>
                 <label for="ownerName">Owner's Name:</label>
@@ -47,10 +44,9 @@
                 </select>
             </fieldset>
 
-            <!-- Grooming Services -->
             <fieldset>
                 <legend>Grooming Services</legend>
-                
+
                 <label for="royalGrooming">Royal Grooming:</label>
                 <select id="royalGrooming" name="royalGrooming">
                     <option value="" disabled selected>Select an option</option>
@@ -72,7 +68,6 @@
                 </select>
             </fieldset>
 
-            <!-- Optional Add-Ons -->
             <fieldset>
                 <legend>Optional Add-Ons</legend>
 
@@ -97,7 +92,6 @@
                 </select>
             </fieldset>
 
-            <!-- Boarding Services -->
             <fieldset>
                 <legend>Boarding Services</legend>
                 <label for="boardingServices">Boarding Services:</label>
@@ -111,12 +105,6 @@
 
             <button type="submit">Book Appointment</button>
         </form>
-    </div>
-
-    <div class="container" id="confirmationCard" style="display: none;">
-        <div class="card">
-            <h2>Your Appointment Has Been Booked!</h2>
-        </div>
     </div>
 
     <script src="script.js"></script>
