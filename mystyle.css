@@ -1,0 +1,127 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F9F4EC;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1{
+    color: white
+}
+
+h2, h3 {
+    color: #f77b19;
+}
+
+/* Header */
+.header {
+    background-color: #f77b19;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 5px solid #9A5307;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.title-container h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.tagline {
+    margin: 0;
+    font-style: italic;
+}
+
+/* Form Styles */
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+fieldset {
+    border: 2px solid #f77b19;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+legend {
+    font-weight: bold;
+    color: #f77b19;
+    padding: 0 10px;
+}
+
+button[type="submit"] {
+    background-color: #f77b19;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #9A5307;
+}
+
+/* Confirmation Card */
+.card {
+    background-color: #fff;
+    border: 2px solid #f77b19;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.card h2 {
+    color: #f77b19;
+}
+
+.card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card li {
+    background: #F9F4EC;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #f77b19;
+    border-radius: 5px;
+}
