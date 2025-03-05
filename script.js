@@ -2,8 +2,8 @@ const appointmentForm = document.getElementById("appointmentForm");
 const confirmationCard = document.getElementById("confirmationCard");
 
 // Supabase initialization (ONLY USE ANON KEY FOR PUBLIC DATA)
-const supabaseUrl = 'YOUR_SUPABASE_URL'; // Replace with your Supabase URL
-const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY'; // Replace with your Supabase ANON Key.
+const supabaseUrl = 'Yhttps://snfhnftwtelgsupzdiyy.supabase.co'; // Replace with your Supabase URL
+const supabaseAnonKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZmhuZnR3dGVsZ3N1cHpkaXl5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDEyOTcsImV4cCI6MjA1NjIxNzI5N30.oeO5sBmZx3Fk_VOrhp4w60-uax9_40oik55AYTZ6rIU; // Replace with your Supabase ANON Key.
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 appointmentForm.addEventListener("submit", async function (e) { // Make callback async
