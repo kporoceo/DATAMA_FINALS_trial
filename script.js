@@ -10,7 +10,7 @@ appointmentForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const formData = new FormData(appointmentForm);
-    
+
     // Collect appointment details
     const appointmentDetails = {
         owner_name: formData.get("ownerName"),
@@ -18,24 +18,23 @@ appointmentForm.addEventListener("submit", async function (e) {
         email: formData.get("emailAddress"),
         pet_name: formData.get("petName"),
         pet_type: formData.get("petType"),
-        royal_grooming: formData.get("royalGrooming") ? "Yes" : "No",
-        bath_blow_dry: formData.get("bathBlowDry") ? "Yes" : "No",
-        sanitary_cut: formData.get("sanitaryCut") ? "Yes" : "No",
-        face_trim: formData.get("faceTrim") ? "Yes" : "No",
-        dematting: formData.get("dematting") ? "Yes" : "No",
-        medicated_shampoo: formData.get("medicatedShampoo") ? "Yes" : "No",
-        haircut: formData.get("haircut") ? "Yes" : "No",
-        boarding_services: formData.get("boardingServices") ? "Yes" : "No",
+        royal_grooming: formData.has("royalGrooming") ? "Yes" : "No",
+        bath_blow_dry: formData.has("bathBlowDry") ? "Yes" : "No",
+        sanitary_cut: formData.has("sanitaryCut") ? "Yes" : "No",
+        face_trim: formData.has("faceTrim") ? "Yes" : "No",
+        dematting: formData.has("dematting") ? "Yes" : "No",
+        medicated_shampoo: formData.has("medicatedShampoo") ? "Yes" : "No",
+        haircut: formData.has("haircut") ? "Yes" : "No",
+        boarding_services: formData.has("boardingServices") ? "Yes" : "No",
         created_at: new Date().toISOString(),
     };
 
-    // Insert data into Supabase
+    // Insert into Supabase
     const { data, error } = await supabase.from("appointments").insert([appointmentDetails]);
 
     if (error) {
         alert("Error booking appointment: " + error.message);
     } else {
-        // Redirect to confirmation page with query parameters
         const queryString = new URLSearchParams(appointmentDetails).toString();
         window.location.href = `confirmation.html?${queryString}`;
     }
