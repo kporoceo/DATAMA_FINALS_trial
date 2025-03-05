@@ -1,4 +1,3 @@
-script.js:
 const appointmentForm = document.getElementById("appointmentForm");
 const confirmationCard = document.getElementById("confirmationCard");
 
