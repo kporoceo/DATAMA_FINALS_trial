@@ -42,6 +42,7 @@ if (appointmentForm) {
 
             const queryString = new URLSearchParams(
                 Object.fromEntries(Object.entries(appointmentDetails).map(([k, v]) => [k, encodeURIComponent(v)])
+                )
             ).toString();
             window.location.href = `confirmation.html?${queryString}`;
         } catch (err) {
