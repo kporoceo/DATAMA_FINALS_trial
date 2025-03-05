@@ -18,55 +18,56 @@
     <script>
         const params = new URLSearchParams(window.location.search);
 
-// Price mapping
-const servicePrices = {
-    "Small - 550": 550, "Medium - 650": 650, "Large - 800": 800, "Extra Large - 975": 975,
-    "Small - 300": 300, "Medium - 350": 350, "Large - 500": 500, "Extra Large - 650": 650,
-    "Small - 350": 350, "Medium - 450": 450, "Large - 550": 550, "Extra Large - 700": 700,
-    "Small - 250": 250, "Medium - 350": 350, "Large - 450": 450, "Extra Large - 600": 600,
-    "None": 0
-};
+        // Price mapping
+        const servicePrices = {
+            "Small - 550": 550, "Medium - 650": 650, "Large - 800": 800, "Extra Large - 975": 975,
+            "Small - 300": 300, "Medium - 350": 350, "Large - 500": 500, "Extra Large - 650": 650,
+            "Small - 350": 350, "Medium - 450": 450, "Large - 550": 550, "Extra Large - 700": 700,
+            "Small - 250": 250, "Medium - 350": 350, "Large - 450": 450, "Extra Large - 600": 600,
+            "None": 0
+        };
 
-// Retrieve and decode appointment details
-const ownerName = decodeURIComponent(params.get("ownerName")) || "N/A";
-const phoneNumber = decodeURIComponent(params.get("phoneNumber")) || "N/A";
-const emailAddress = decodeURIComponent(params.get("emailAddress")) || "N/A";
-const petName = decodeURIComponent(params.get("petName")) || "N/A";
-const petType = decodeURIComponent(params.get("petType")) || "N/A";
+        // Retrieve and decode appointment details
+        const ownerName = decodeURIComponent(params.get("ownerName")) || "N/A";
+        const phoneNumber = decodeURIComponent(params.get("phoneNumber")) || "N/A";
+        const emailAddress = decodeURIComponent(params.get("emailAddress")) || "N/A";
+        const petName = decodeURIComponent(params.get("petName")) || "N/A";
+        const petType = decodeURIComponent(params.get("petType")) || "N/A";
 
-const services = {
-    "Royal Grooming": decodeURIComponent(params.get("royalGrooming")) || "None",
-    "Bath & Blow Dry": decodeURIComponent(params.get("bathBlowDry")) || "None",
-    "Dematting": decodeURIComponent(params.get("dematting")) || "None",
-    "Medicated Shampoo": decodeURIComponent(params.get("medicatedShampoo")) || "None",
-    "Boarding Service": decodeURIComponent(params.get("boardingServices")) || "None"
-};
+        const services = {
+            "Royal Grooming": decodeURIComponent(params.get("royalGrooming")) || "None",
+            "Bath & Blow Dry": decodeURIComponent(params.get("bathBlowDry")) || "None",
+            "Dematting": decodeURIComponent(params.get("dematting")) || "None",
+            "Medicated Shampoo": decodeURIComponent(params.get("medicatedShampoo")) || "None",
+            "Boarding Service": decodeURIComponent(params.get("boardingServices")) || "None"
+        };
 
-// Calculate total price
-let totalPrice = 0;
-for (const service in services) {
-    if (servicePrices[services[service]]) {
-        totalPrice += servicePrices[services[service]];
-    }
-}
+        // Calculate total price
+        let totalPrice = 0;
+            for (const service in services) {
+            if (servicePrices[services[service]]) {
+            totalPrice += servicePrices[services[service]];
+            }
+        }   
 
-// Generate confirmation message
-let serviceList = "";
-for (const [service, value] of Object.entries(services)) {
-    if (value !== "None") {
-        serviceList += `<li>${service}: ${value}</li>`;
-    }
-}
-serviceList = serviceList || "<li>No services selected.</li>";
+        // Generate confirmation message
+        let serviceList = "";
+            for (const [service, value] of Object.entries(services)) {
+            if (value !== "None") {
+            serviceList += `<li>${service}: ${value}</li>`;
+            }
+        }
+        
+        serviceList = serviceList || "<li>No services selected.</li>";
 
-document.getElementById("confirmationDetails").innerHTML = `
-    <p>Thank you, <strong>${ownerName}</strong>, for booking an appointment for <strong>${petName}</strong> (${petType}).</p>
-    <p>We will contact you at <strong>${phoneNumber}</strong> or <strong>${emailAddress}</strong>.</p>
-    <h3>Selected Services:</h3>
-    <ul>${serviceList}</ul>
-`;
+        document.getElementById("confirmationDetails").innerHTML = `
+            <p>Thank you, <strong>${ownerName}</strong>, for booking an appointment for <strong>${petName}</strong> (${petType}).</p>
+            <p>We will contact you at <strong>${phoneNumber}</strong> or <strong>${emailAddress}</strong>.</p>
+            <h3>Selected Services:</h3>
+            <ul>${serviceList}</ul>
+        `;
 
-document.getElementById("totalPrice").textContent = `₱${totalPrice}`;
+        document.getElementById("totalPrice").textContent = `₱${totalPrice}`;
     </script>
 </body>
 </html>
