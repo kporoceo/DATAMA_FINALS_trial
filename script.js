@@ -22,11 +22,8 @@ if (appointmentForm) {
             petType: formData.get("petType"),
             royalGrooming: formData.get("royalGrooming") || "None",
             bathBlowDry: formData.get("bathBlowDry") || "None",
-            sanitaryCut: formData.get("sanitaryCut") || "None",
-            faceTrim: formData.get("faceTrim") || "None",
             dematting: formData.get("dematting") || "None",
             medicatedShampoo: formData.get("medicatedShampoo") || "None",
-            haircut: formData.get("haircut") || "None",
             boardingServices: formData.get("boardingServices") || "None",
             createdAt: new Date().toISOString(),
         };
