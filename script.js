@@ -1,41 +1,54 @@
-// Initialize Supabase
-const SUPABASE_URL = "https://your-supabase-url.supabase.co"; // Replace with your Supabase project URL
-const SUPABASE_ANON_KEY = "your-anon-key"; // Replace with your Supabase anon key
-
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
 const appointmentForm = document.getElementById("appointmentForm");
+const confirmationCard = document.getElementById("confirmationCard");
 
-appointmentForm.addEventListener("submit", async function (e) {
+appointmentForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const formData = new FormData(appointmentForm);
+    const queryString = new URLSearchParams(formData).toString();
+    
+    window.location.href = `confirmation.html?${queryString}`;
 
     // Collect appointment details
     const appointmentDetails = {
-        owner_name: formData.get("ownerName"),
-        phone_number: formData.get("phoneNumber"),
-        email: formData.get("emailAddress"),
-        pet_name: formData.get("petName"),
-        pet_type: formData.get("petType"),
-        royal_grooming: formData.has("royalGrooming") ? "Yes" : "No",
-        bath_blow_dry: formData.has("bathBlowDry") ? "Yes" : "No",
-        sanitary_cut: formData.has("sanitaryCut") ? "Yes" : "No",
-        face_trim: formData.has("faceTrim") ? "Yes" : "No",
-        dematting: formData.has("dematting") ? "Yes" : "No",
-        medicated_shampoo: formData.has("medicatedShampoo") ? "Yes" : "No",
-        haircut: formData.has("haircut") ? "Yes" : "No",
-        boarding_services: formData.has("boardingServices") ? "Yes" : "No",
-        created_at: new Date().toISOString(),
+        ownerName: formData.get("ownerName"),
+        phoneNumber: formData.get("phoneNumber"),
+        emailAddress: formData.get("emailAddress"),
+        petName: formData.get("petName"),
+        petType: formData.get("petType"),
+        royalGrooming: formData.get("royalGrooming"),
+        bathBlowDry: formData.get("bathBlowDry"),
+        sanitaryCut: formData.get("sanitaryCut"),
+        faceTrim: formData.get("faceTrim"),
+        dematting: formData.get("dematting"),
+        medicatedShampoo: formData.get("medicatedShampoo"),
+        haircut: formData.get("haircut"),
+        boardingServices: formData.get("boardingServices"),
     };
 
-    // Insert into Supabase
-    const { data, error } = await supabase.from("appointments").insert([appointmentDetails]);
+    // Generate confirmation message
+    confirmationCard.innerHTML = `
+        <div class="card">
+            <h2>Your Appointment Has Been Booked!</h2>
+            <p>Thank you, <strong>${appointmentDetails.ownerName}</strong>, for booking an appointment for <strong>${appointmentDetails.petName}</strong> (${appointmentDetails.petType}).</p>
+            <p>We will contact you at <strong>${appointmentDetails.phoneNumber}</strong> or <strong>${appointmentDetails.emailAddress}</strong> to confirm the details.</p>
+            <h3>Selected Services:</h3>
+            <ul>
+                <li>Royal Grooming: ${appointmentDetails.royalGrooming || "None"}</li>
+                <li>Bath & Blow Dry: ${appointmentDetails.bathBlowDry || "None"}</li>
+                <li>Sanitary Cut: ${appointmentDetails.sanitaryCut || "None"}</li>
+                <li>Face Trim: ${appointmentDetails.faceTrim || "None"}</li>
+                <li>Dematting: ${appointmentDetails.dematting || "None"}</li>
+                <li>Medicated Shampoo: ${appointmentDetails.medicatedShampoo || "None"}</li>
+                <li>Haircut: ${appointmentDetails.haircut || "None"}</li>
+                <li>Boarding Service: ${appointmentDetails.boardingServices || "None"}</li>
+            </ul>
+        </div>
+    `;
 
-    if (error) {
-        alert("Error booking appointment: " + error.message);
-    } else {
-        const queryString = new URLSearchParams(appointmentDetails).toString();
-        window.location.href = `confirmation.html?${queryString}`;
-    }
+    // Show the confirmation card
+    confirmationCard.style.display = "block";
+
+    // Clear the form
+    appointmentForm.reset();
 });
