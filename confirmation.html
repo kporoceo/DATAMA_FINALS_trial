@@ -17,43 +17,19 @@
 
     <script>
         const params = new URLSearchParams(window.location.search);
+        const prices = { "Small - 550": 550, "Medium - 650": 650, "Large - 800": 800, "Extra Large - 975": 975, "None": 0 };
 
-        // Price mapping
-        const servicePrices = {
-            "Small - 550": 550,
-            "Medium - 650": 650,
-            "Large - 800": 800,
-            "Extra Large - 975": 975,
-            "Small - 300": 300,
-            "Medium - 350": 350,
-            "Large - 500": 500,
-            "Extra Large - 650": 650,
-            "Small - 150": 150,
-            "Medium - 200": 200,
-            "Large - 250": 250,
-            "Extra Large - 300": 300,
-            "None": 0
-        };
-
-        // Get service selections
         const royalGrooming = params.get("royalGrooming") || "None";
-        const bathBlowDry = params.get("bathBlowDry") || "None";
+        const totalPrice = prices[royalGrooming] || 0;
 
-        // Calculate total price
-        const totalPrice = (servicePrices[royalGrooming] || 0) + (servicePrices[bathBlowDry] || 0);
-
-        // Display appointment details and total price
-        const appointmentDetails = `
-            <p>Thank you, <strong>${params.get("ownerName")}</strong>, for booking an appointment for your pet <strong>${params.get("petName")}</strong> (${params.get("petType")}).</p>
+        const details = `
+            <p>Thank you, <strong>${params.get("ownerName")}</strong>, for booking an appointment for <strong>${params.get("petName")}</strong> (${params.get("petType")}).</p>
             <p>We will contact you at <strong>${params.get("phoneNumber")}</strong> or <strong>${params.get("emailAddress")}</strong>.</p>
             <h3>Selected Services:</h3>
-            <ul>
-                <li>Royal Grooming: ${royalGrooming}</li>
-                <li>Bath & Blow Dry: ${bathBlowDry}</li>
-            </ul>
+            <ul><li>Royal Grooming: ${royalGrooming}</li></ul>
         `;
 
-        document.getElementById("confirmationDetails").innerHTML = appointmentDetails;
+        document.getElementById("confirmationDetails").innerHTML = details;
         document.getElementById("totalPrice").textContent = `₱${totalPrice}`;
     </script>
 </body>
