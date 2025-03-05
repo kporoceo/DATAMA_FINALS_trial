@@ -20,40 +20,55 @@
 
         // Price mapping
         const servicePrices = {
-            "Small - 550": 550,
-            "Medium - 650": 650,
-            "Large - 800": 800,
-            "Extra Large - 975": 975,
-            "Small - 300": 300,
-            "Medium - 350": 350,
-            "Large - 500": 500,
-            "Extra Large - 650": 650,
-            "Small - 150": 150,
-            "Medium - 200": 200,
-            "Large - 250": 250,
-            "Extra Large - 300": 300,
+            "Small - 550": 550, "Medium - 650": 650, "Large - 800": 800, "Extra Large - 975": 975,
+            "Small - 300": 300, "Medium - 350": 350, "Large - 500": 500, "Extra Large - 650": 650,
+            "Small - 350": 350, "Medium - 450": 450, "Large - 550": 550, "Extra Large - 700": 700,
+            "Small - 250": 250, "Medium - 350": 350, "Large - 450": 450, "Extra Large - 600": 600,
             "None": 0
         };
 
-        // Get service selections
-        const royalGrooming = params.get("royalGrooming") || "None";
-        const bathBlowDry = params.get("bathBlowDry") || "None";
+        // Retrieve appointment details
+        const ownerName = params.get("ownerName") || "N/A";
+        const phoneNumber = params.get("phoneNumber") || "N/A";
+        const emailAddress = params.get("emailAddress") || "N/A";
+        const petName = params.get("petName") || "N/A";
+        const petType = params.get("petType") || "N/A";
+
+        const services = {
+            "Royal Grooming": params.get("royalGrooming") || "None",
+            "Bath & Blow Dry": params.get("bathBlowDry") || "None",
+            "Sanitary Cut": params.get("sanitaryCut") || "None",
+            "Face Trim": params.get("faceTrim") || "None",
+            "Dematting": params.get("dematting") || "None",
+            "Medicated Shampoo": params.get("medicatedShampoo") || "None",
+            "Haircut": params.get("haircut") || "None",
+            "Boarding Service": params.get("boardingServices") || "None"
+        };
 
         // Calculate total price
-        const totalPrice = (servicePrices[royalGrooming] || 0) + (servicePrices[bathBlowDry] || 0);
+        let totalPrice = 0;
+        for (const service in services) {
+            if (servicePrices[services[service]]) {
+                totalPrice += servicePrices[services[service]];
+            }
+        }
 
-        // Display appointment details and total price
-        const appointmentDetails = `
-            <p>Thank you, <strong>${params.get("ownerName")}</strong>, for booking an appointment for your pet <strong>${params.get("petName")}</strong> (${params.get("petType")}).</p>
-            <p>We will contact you at <strong>${params.get("phoneNumber")}</strong> or <strong>${params.get("emailAddress")}</strong>.</p>
+        // Generate confirmation message
+        let serviceList = "";
+        for (const [service, value] of Object.entries(services)) {
+            if (value !== "None") {
+                serviceList += `<li>${service}: ${value}</li>`;
+            }
+        }
+        serviceList = serviceList || "<li>No services selected.</li>";
+
+        document.getElementById("confirmationDetails").innerHTML = `
+            <p>Thank you, <strong>${ownerName}</strong>, for booking an appointment for <strong>${petName}</strong> (${petType}).</p>
+            <p>We will contact you at <strong>${phoneNumber}</strong> or <strong>${emailAddress}</strong>.</p>
             <h3>Selected Services:</h3>
-            <ul>
-                <li>Royal Grooming: ${royalGrooming}</li>
-                <li>Bath & Blow Dry: ${bathBlowDry}</li>
-            </ul>
+            <ul>${serviceList}</ul>
         `;
 
-        document.getElementById("confirmationDetails").innerHTML = appointmentDetails;
         document.getElementById("totalPrice").textContent = `₱${totalPrice}`;
     </script>
 </body>

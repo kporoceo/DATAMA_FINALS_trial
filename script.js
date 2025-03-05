@@ -1,60 +1,43 @@
 const supabaseUrl = 'https://zstptnblkfdpjnmvgeng.supabase.co'; // Replace with your Supabase project URL
 const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpzdHB0bmJsa2ZkcGpubXZnZW5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDExNjg0ODYsImV4cCI6MjA1Njc0NDQ4Nn0.q78LYNBD6hApZnR7OpnCz4swAnEJNwx4-sYClwY6SQg.SUPABASE_KEY; // Replace with your Supabase anon key
 
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 const appointmentForm = document.getElementById("appointmentForm");
-const confirmationCard = document.getElementById("confirmationCard");
 
-appointmentForm.addEventListener("submit", function (e) {
+appointmentForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const formData = new FormData(appointmentForm);
-    const queryString = new URLSearchParams(formData).toString();
-    
-    window.location.href = `confirmation.html?${queryString}`;
-
-    // Collect appointment details
     const appointmentDetails = {
         ownerName: formData.get("ownerName"),
         phoneNumber: formData.get("phoneNumber"),
         emailAddress: formData.get("emailAddress"),
         petName: formData.get("petName"),
         petType: formData.get("petType"),
-        royalGrooming: formData.get("royalGrooming"),
-        bathBlowDry: formData.get("bathBlowDry"),
-        sanitaryCut: formData.get("sanitaryCut"),
-        faceTrim: formData.get("faceTrim"),
-        dematting: formData.get("dematting"),
-        medicatedShampoo: formData.get("medicatedShampoo"),
-        haircut: formData.get("haircut"),
-        boardingServices: formData.get("boardingServices"),
+        royalGrooming: formData.get("royalGrooming") || "None",
+        bathBlowDry: formData.get("bathBlowDry") || "None",
+        sanitaryCut: formData.get("sanitaryCut") || "None",
+        faceTrim: formData.get("faceTrim") || "None",
+        dematting: formData.get("dematting") || "None",
+        medicatedShampoo: formData.get("medicatedShampoo") || "None",
+        haircut: formData.get("haircut") || "None",
+        boardingServices: formData.get("boardingServices") || "None",
         createdAt: new Date().toISOString(),
     };
 
-    // Generate confirmation message
-    confirmationCard.innerHTML = `
-        <div class="card">
-            <h2>Your Appointment Has Been Booked!</h2>
-            <p>Thank you, <strong>${appointmentDetails.ownerName}</strong>, for booking an appointment for <strong>${appointmentDetails.petName}</strong> (${appointmentDetails.petType}).</p>
-            <p>We will contact you at <strong>${appointmentDetails.phoneNumber}</strong> or <strong>${appointmentDetails.emailAddress}</strong> to confirm the details.</p>
-            <h3>Selected Services:</h3>
-            <ul>
-                <li>Royal Grooming: ${appointmentDetails.royalGrooming || "None"}</li>
-                <li>Bath & Blow Dry: ${appointmentDetails.bathBlowDry || "None"}</li>
-                <li>Sanitary Cut: ${appointmentDetails.sanitaryCut || "None"}</li>
-                <li>Face Trim: ${appointmentDetails.faceTrim || "None"}</li>
-                <li>Dematting: ${appointmentDetails.dematting || "None"}</li>
-                <li>Medicated Shampoo: ${appointmentDetails.medicatedShampoo || "None"}</li>
-                <li>Haircut: ${appointmentDetails.haircut || "None"}</li>
-                <li>Boarding Service: ${appointmentDetails.boardingServices || "None"}</li>
-            </ul>
-        </div>
-    `;
+    // Insert data into Supabase
+    const { data, error } = await supabase
+        .from("appointments")
+        .insert([appointmentDetails]);
 
-    // Show the confirmation card
-    confirmationCard.style.display = "block";
+    if (error) {
+        console.error("Error booking appointment:", error);
+        alert("There was an error booking your appointment. Please try again.");
+        return;
+    }
 
-    // Clear the form
-    appointmentForm.reset();
+    // Redirect to confirmation page with query parameters
+    const queryString = new URLSearchParams(appointmentDetails).toString();
+    window.location.href = `confirmation.html?${queryString}`;
 });
