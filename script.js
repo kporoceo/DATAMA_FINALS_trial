@@ -1,3 +1,4 @@
+import { createClient } from '@supabase/supabase-js';
 
 // Supabase credentials
 const supabaseUrl = 'https://zstptnblkfdpjnmvgeng.supabase.co'; 
