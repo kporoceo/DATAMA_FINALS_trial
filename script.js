@@ -1,7 +1,8 @@
 const supabaseUrl = 'https://zstptnblkfdpjnmvgeng.supabase.co'; 
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpzdHB0bmJsa2ZkcGpubXZnZW5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDExNjg0ODYsImV4cCI6MjA1Njc0NDQ4Nn0.q78LYNBD6hApZnR7OpnCz4swAnEJNwx4-sYClwY6SQg';
 
-const supabase = window.supabase?.createClient(supabaseUrl, supabaseKey);
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 if (!supabase) {
     console.error("Failed to initialize Supabase.");
 }
@@ -28,20 +29,25 @@ if (appointmentForm) {
             createdAt: new Date().toISOString(),
         };
 
-        const { data, error } = await supabase
-            .from("appointments")
-            .insert([appointmentDetails]);
+        try {
+            const { data, error } = await supabase
+                .from("appointments")
+                .insert([appointmentDetails]);
 
-        if (error) {
-            console.error("Error booking appointment:", error);
-            alert("There was an error booking your appointment. Please try again.");
-            return;
+            if (error) {
+                console.error("Error booking appointment:", error);
+                alert("There was an error booking your appointment. Please try again.");
+                return;
+            }
+
+            const queryString = new URLSearchParams(
+                Object.fromEntries(Object.entries(appointmentDetails).map(([k, v]) => [k, encodeURIComponent(v)])
+            ).toString();
+            window.location.href = `confirmation.html?${queryString}`;
+        } catch (err) {
+            console.error("Unexpected error:", err);
+            alert("An unexpected error occurred. Please try again.");
         }
-
-        const queryString = new URLSearchParams(
-            Object.fromEntries(Object.entries(appointmentDetails).map(([k, v]) => [k, encodeURIComponent(v)]))
-        ).toString();
-        window.location.href = `confirmation.html?${queryString}`;
     });
 } else {
     console.error("appointmentForm not found. Ensure your form has the correct ID.");
