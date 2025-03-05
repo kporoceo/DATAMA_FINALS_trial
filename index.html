@@ -20,8 +20,6 @@
     <div class="container">
         <h2>Book an Appointment</h2>
         <form id="appointmentForm" autocomplete="off" action="processappointment.php" method="POST">
-            <input type="text" name="fakeField" style="display: none;">
-
             <fieldset>
                 <legend>Owner and Pet Information</legend>
                 <label for="ownerName">Owner's Name:</label>
@@ -46,60 +44,14 @@
 
             <fieldset>
                 <legend>Grooming Services</legend>
-
                 <label for="royalGrooming">Royal Grooming:</label>
                 <select id="royalGrooming" name="royalGrooming">
                     <option value="" disabled selected>Select an option</option>
-                    <option value="Small - 550">Small (1.0kg - 6.9kg) - 550</option>
-                    <option value="Medium - 650">Medium (7.0kg - 9.9kg) - 650</option>
-                    <option value="Large - 800">Large (10.0kg - 15.9kg) - 800</option>
-                    <option value="Extra Large - 975">Extra Large (16.0kg - 40.0kg) - 975</option>
+                    <option value="Small - 550">Small - ₱550</option>
+                    <option value="Medium - 650">Medium - ₱650</option>
+                    <option value="Large - 800">Large - ₱800</option>
+                    <option value="Extra Large - 975">Extra Large - ₱975</option>
                     <option value="None">None</option>
-                </select>
-
-                <label for="bathBlowDry">Bath & Blow Dry Only:</label>
-                <select id="bathBlowDry" name="bathBlowDry">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Small - 300">Small (1.0kg - 6.9kg) - 300</option>
-                    <option value="Medium - 350">Medium (7.0kg - 9.9kg) - 350</option>
-                    <option value="Large - 500">Large (10.0kg - 15.9kg) - 500</option>
-                    <option value="Extra Large - 650">Extra Large (16.0kg - 40.0kg) - 650</option>
-                    <option value="None">None</option>
-                </select>
-            </fieldset>
-
-            <fieldset>
-                <legend>Optional Add-Ons</legend>
-
-                <label for="dematting">Dematting:</label>
-                <select id="dematting" name="dematting">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Small - 350">Small (1.0kg - 6.9kg) - 350</option>
-                    <option value="Medium - 450">Medium (7.0kg - 9.9kg) - 450</option>
-                    <option value="Large - 550">Large (10.0kg - 15.9kg) - 550</option>
-                    <option value="Extra Large - 700">Extra Large (16.0kg - 40.0kg) - 700</option>
-                    <option value="None">None</option>
-                </select>
-
-                <label for="medicatedShampoo">Medicated Shampoo:</label>
-                <select id="medicatedShampoo" name="medicatedShampoo">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Small - 250">Small (1.0kg - 6.9kg) - 250</option>
-                    <option value="Medium - 350">Medium (7.0kg - 9.9kg) - 350</option>
-                    <option value="Large - 450">Large (10.0kg - 15.9kg) - 450</option>
-                    <option value="Extra Large - 600">Extra Large (16.0kg - 40.0kg) - 600</option>
-                    <option value="None">None</option>
-                </select>
-            </fieldset>
-
-            <fieldset>
-                <legend>Boarding Services</legend>
-                <label for="boardingServices">Boarding Services:</label>
-                <select id="boardingServices" name="boardingServices">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="With Grooming">With Grooming (free 1 hour stay, succeeding hours 50/hr)</option>
-                    <option value="Without Grooming">Without Grooming (1st hour 100, succeeding 80/hr)</option>
-                    <option value="8 Hour Package">8 Hour Package - 500</option>
                 </select>
             </fieldset>
 
