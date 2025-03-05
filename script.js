@@ -2,8 +2,8 @@
 const supabaseUrl = 'https://zstptnblkfdpjnmvgeng.supabase.co'; 
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpzdHB0bmJsa2ZkcGpubXZnZW5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDExNjg0ODYsImV4cCI6MjA1Njc0NDQ4Nn0.q78LYNBD6hApZnR7OpnCz4swAnEJNwx4-sYClwY6SQg';
 
-// Initialize Supabase
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+// ✅ Correct way to initialize Supabase
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 const appointmentForm = document.getElementById("appointmentForm");
 
