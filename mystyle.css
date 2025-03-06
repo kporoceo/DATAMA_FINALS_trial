@@ -125,3 +125,25 @@ button[type="submit"]:hover {
     border: 1px solid #f77b19;
     border-radius: 5px;
 }
+
+/* Admin Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f77b19;
+    color: white;
+}
+
+table tr:hover {
+    background-color: #f9f4ec;
+}
