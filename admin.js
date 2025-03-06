@@ -24,11 +24,21 @@ async function fetchAppointments() {
 
     if (error) {
         console.error("Error fetching appointments:", error);
+        alert("There was an error fetching appointments. Please try again.");
         return;
     }
 
     const tbody = document.querySelector("#appointmentsTable tbody");
     tbody.innerHTML = ""; // Clear existing rows
+
+    if (data.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="8" style="text-align: center;">No appointments found.</td>
+            </tr>
+        `;
+        return;
+    }
 
     data.forEach(appointment => {
         const services = [
@@ -61,3 +71,17 @@ async function fetchAppointments() {
 
 // Fetch appointments on page load
 fetchAppointments();
+
+// Optional: Add a refresh button to manually fetch appointments
+const refreshButton = document.createElement("button");
+refreshButton.textContent = "Refresh Appointments";
+refreshButton.style.marginTop = "20px";
+refreshButton.style.padding = "10px 20px";
+refreshButton.style.backgroundColor = "#f77b19";
+refreshButton.style.color = "white";
+refreshButton.style.border = "none";
+refreshButton.style.borderRadius = "5px";
+refreshButton.style.cursor = "pointer";
+refreshButton.addEventListener("click", fetchAppointments);
+
+document.querySelector(".container").appendChild(refreshButton);
