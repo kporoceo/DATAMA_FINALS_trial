@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin View: Pet Kingdom PH</title>
+    <link rel="stylesheet" href="mystyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="petkingdom logo.png" alt="Pet Kingdom Logo" class="logo">
+            <div class="title-container">
+                <h1>PET KINGDOM</h1>
+                <p class="tagline">Admin Dashboard</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Content -->
+    <div class="container">
+        <h2>Appointment Management</h2>
+        <table id="appointmentsTable">
+            <thead>
+                <tr>
+                    <th>Owner Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Pet Name</th>
+                    <th>Pet Type</th>
+                    <th>Services</th>
+                    <th>Total Price</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="admin/admin.js"></script>
+</body>
+</html>
